@@ -23,5 +23,8 @@ jobs:
       - name: Install Ansible
         run: pip install ansible
 
+      - name: Install Galaxy roles
+        run: ansible-galaxy role install -r requirements.yml
+
       - name: Run syntax check
         run: ansible-playbook -i inventory.ini site.yml --syntax-check

@@ -1,16 +1,16 @@
 ---
 - name: Update apt cache
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     cache_valid_time: 3600
 
 - name: Install nginx
-  apt:
+  ansible.builtin.apt:
     name: nginx
     state: present
 
 - name: Deploy custom index.html
-  template:
+  ansible.builtin.template:
     src: index.html.j2
     dest: /var/www/html/index.html
     owner: www-data
@@ -19,29 +19,7 @@
   notify: Reload nginx
 
 - name: Ensure nginx is running and enabled
-  service:
+  ansible.builtin.service:
     name: nginx
     state: started
     enabled: true
-
-- name: Deploy default site config for PHP
-  template:
-    src: default-site.conf.j2
-    dest: /etc/nginx/sites-available/default
-    owner: root
-    group: root
-    mode: '0644'
-  notify: Reload nginx
-
-- name: Deploy test PHP page
-  copy:
-    dest: /var/www/html/index.php
-    content: |
-      <?php
-      echo "<h1>Hello from Ansible!</h1>";
-      echo "<p>Server: " . gethostname() . "</p>";
-      echo "<p>PHP version: " . phpversion() . "</p>";
-      ?>
-    owner: www-data
-    group: www-data
-    mode: '0644'

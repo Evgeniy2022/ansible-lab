@@ -1,3 +1,3 @@
 ---
 nginx_port: 80
-site_title: "Ansible Lab"
+nginx_site_title: "Ansible Lab"

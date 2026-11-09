@@ -1,0 +1,27 @@
+---
+stages:
+  - lint
+  - syntax
+
+variables:
+  ANSIBLE_FORCE_COLOR: "true"
+
+.ansible_setup:
+  before_script:
+    - python3 --version
+    - python3 -m pip install --upgrade pip
+    - python3 -m pip install ansible ansible-lint
+
+ansible-lint:
+  stage: lint
+  extends: .ansible_setup
+  script:
+    - ansible-lint site.yml roles/
+
+syntax-check:
+  stage: syntax
+  extends: .ansible_setup
+  script:
+    - ansible-playbook -i inventory.ini site.yml --syntax-check
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'

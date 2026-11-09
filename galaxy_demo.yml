@@ -1,0 +1,16 @@
+---
+- name: Install Nginx using Galaxy role
+  hosts: managed
+  become: true
+
+  roles:
+    - role: geerlingguy.nginx
+      vars:
+        nginx_remove_default_vhost: true
+        nginx_client_max_body_size: "128m"
+        nginx_worker_connections: "2048"
+        nginx_vhosts:
+          - listen: "80"
+            server_name: "example.com"
+            root: "/var/www/html"
+            index: "index.html"

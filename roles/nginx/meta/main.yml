@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: joni22rus
+  description: Install and configure Nginx with custom index.html
+  company: Ansible Lab
+  license: MIT
+  min_ansible_version: "2.10"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+  galaxy_tags:
+    - nginx
+    - web
+
+dependencies: []

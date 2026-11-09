@@ -1,0 +1,12 @@
+---
+- name: Demo using Vault secrets
+  hosts: managed
+  become: true
+
+  vars_files:
+    - secrets.yml
+
+  tasks:
+    - name: Show secret (only for demo!)
+      debug:
+        msg: "The DB password is: {{ db_password }}"

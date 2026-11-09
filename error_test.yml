@@ -1,0 +1,33 @@
+---
+- name: Test error handling
+  hosts: managed
+  become: yes
+
+  tasks:
+    - block:
+        - name: Try to install non-existent package
+          apt:
+            name: this-package-does-not-exist-12345
+            state: present
+
+        - name: This task will be skipped on error
+          debug:
+            msg: "Вы этого не увидите, если предыдущая упала"
+
+      rescue:
+        - name: Handle the error gracefully
+          debug:
+            msg: "❌ Ошибка поймана! Пакет не существует, но playbook продолжается."
+
+        - name: Mark error was handled
+          set_fact:
+            error_handled: true
+
+      always:
+        - name: This always runs
+          debug:
+            msg: "✅ Always-блок выполнился (независимо от ошибки)"
+
+    - name: Continue after block
+      debug:
+        msg: "Playbook продолжил работу после ошибки"

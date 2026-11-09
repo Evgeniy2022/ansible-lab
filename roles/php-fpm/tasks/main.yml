@@ -1,0 +1,18 @@
+---
+- name: Install PHP-FPM and modules
+  apt:
+    name:
+      - php-fpm
+      - php-mysql
+      - php-mbstring
+      - php-xml
+      - php-curl
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Ensure PHP-FPM is running and enabled
+  service:
+    name: php8.1-fpm
+    state: started
+    enabled: true

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ansible Lab - {{ ansible_hostname }}</title>
+    <style>
+        body { font-family: Arial; background: #f0f0f0; padding: 50px; }
+        h1 { color: #2c3e50; }
+        .info { background: white; padding: 20px; border-radius: 8px; }
+        .label { font-weight: bold; color: #3498db; }
+    </style>
+</head>
+<body>
+		<p><span class="label">Test:</span> diff mode</p>
+    <div class="info">
+        <h1>🚀 Hello from {{ ansible_hostname }}</h1>
+        <p><span class="label">Hostname:</span> {{ ansible_hostname }}</p>
+        <p><span class="label">IP Address:</span> {{ ansible_default_ipv4.address }}</p>
+        <p><span class="label">OS:</span> {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+        <p><span class="label">Managed by:</span> Ansible</p>
+    </div>
+</body>
+</html>

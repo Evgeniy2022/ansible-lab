@@ -1,0 +1,15 @@
+---
+- name: Check nginx health
+  hosts: managed
+  become: true
+
+  tasks:
+    - name: Get nginx HTTP status
+      command: curl -s -o /dev/null -w "%{http_code}" http://localhost
+      register: http_result
+      changed_when: false
+      failed_when: http_result.stdout != "200"
+
+    - name: Show result
+      debug:
+        msg: "HTTP status: {{ http_result.stdout }}"

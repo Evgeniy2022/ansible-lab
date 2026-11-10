@@ -1,6 +1,6 @@
 ---
 - name: Install PHP-FPM and modules
-  apt:
+  ansible.builtin.apt:
     name:
       - php-fpm
       - php-mysql
@@ -12,7 +12,7 @@
     cache_valid_time: 3600
 
 - name: Ensure PHP-FPM is running and enabled
-  service:
+  ansible.builtin.service:
     name: php8.1-fpm
     state: started
     enabled: true

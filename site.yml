@@ -14,5 +14,5 @@
 
   tasks:
     - name: Use encrypted string
-      debug:
+      ansible.builtin.debug:
         msg: "Password: {{ db_password }}"

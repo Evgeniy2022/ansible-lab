@@ -8,5 +8,5 @@
 
   tasks:
     - name: Show secret (only for demo!)
-      debug:
+      ansible.builtin.debug:
         msg: "The DB password is: {{ db_password }}"

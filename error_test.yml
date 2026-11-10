@@ -4,7 +4,8 @@
   become: true
 
   tasks:
-    - block:
+    - name: Block with error handling
+      block:
         - name: Try to install non-existent package
           ansible.builtin.apt:
             name: this-package-does-not-exist-12345
